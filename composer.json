@@ -1,0 +1,34 @@
+{
+    "name": "qlimix/cli",
+    "type": "library",
+    "description": "Command line interface tools",
+    "license": "MIT",
+    "keywords": [
+        "cli"
+    ],
+    "authors": [
+        {
+            "name": "frank",
+            "email": "frank@qlimix.net"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "qlimix/code-standard": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Qlimix\\Cli\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Qlimix\\Tests\\Cli\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
