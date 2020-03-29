@@ -1,0 +1,5 @@
+parameters:
+  excludes_analyse:
+    # substr can return false
+    - src/Output/Table/Column.php
+
