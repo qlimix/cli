@@ -24,6 +24,11 @@ final class Name
         return $this->name;
     }
 
+    public function equals(Name $name): bool
+    {
+        return $this->name === $name->toString();
+    }
+
     /**
      * @throws InvalidNameException
      */

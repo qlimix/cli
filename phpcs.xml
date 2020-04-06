@@ -13,5 +13,6 @@
 
 <rule ref="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter">
     <exclude-pattern>src/Output/Table/Calculator/SimpleCalculator.php</exclude-pattern>
+    <exclude-pattern>src/Command/ListCommand.php</exclude-pattern>
 </rule>
 </ruleset>

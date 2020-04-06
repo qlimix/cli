@@ -28,7 +28,7 @@ final class RegistryTest extends TestCase
 
         $this->registry->register($command);
 
-        $this->assertSame($command, $this->registry->get($name->toString()));
+        $this->assertSame($command, $this->registry->get($name));
         $this->assertSame($command, $this->registry->getCommands()[0]);
     }
 
@@ -47,6 +47,6 @@ final class RegistryTest extends TestCase
     public function testShouldThrowOnNotFoundCommand(): void
     {
         $this->expectException(NotFoundException::class);
-        $this->registry->get('test');
+        $this->registry->get(new Name('test'));
     }
 }

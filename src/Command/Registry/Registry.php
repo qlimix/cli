@@ -3,6 +3,7 @@
 namespace Qlimix\Cli\Command\Registry;
 
 use Qlimix\Cli\Command\Command;
+use Qlimix\Cli\Command\Name;
 use Qlimix\Cli\Command\Registry\Exception\NotFoundException;
 use Qlimix\Cli\Command\Registry\Exception\NotUniqueException;
 
@@ -28,15 +29,15 @@ final class Registry implements RegistryInterface
     /**
      * @inheritDoc
      */
-    public function get(string $name): Command
+    public function get(Name $name): Command
     {
         foreach ($this->commands as $command) {
-            if ($command->getName()->toString() === $name) {
+            if ($command->getName()->equals($name)) {
                 return $command;
             }
         }
 
-        throw new NotFoundException('Command '.$name.' not found');
+        throw new NotFoundException('Command '.$name->toString().' not found');
     }
 
     /**

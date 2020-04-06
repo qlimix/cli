@@ -3,6 +3,7 @@
 namespace Qlimix\Cli\Command\Registry;
 
 use Qlimix\Cli\Command\Command;
+use Qlimix\Cli\Command\Name;
 use Qlimix\Cli\Command\Registry\Exception\NotFoundException;
 use Qlimix\Cli\Command\Registry\Exception\NotUniqueException;
 
@@ -16,7 +17,7 @@ interface RegistryInterface
     /**
      * @throws NotFoundException
      */
-    public function get(string $name): Command;
+    public function get(Name $name): Command;
 
     /**
      * @return Command[]

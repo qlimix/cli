@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Qlimix\Cli\Command\Input\Parser;
+namespace Qlimix\Cli\Command\Input\Cli;
 
 use Qlimix\Cli\Command\Input\Parser\Exception\ArgumentsException;
 
-final class CliArguments
+final class Arguments
 {
-    /** @var CliArgument[] */
+    /** @var Argument[] */
     private array $arguments;
 
     private int $pointer = 0;
 
     /**
-     * @param CliArgument[] $arguments
+     * @param Argument[] $arguments
      */
     public function __construct(array $arguments)
     {
@@ -22,7 +22,7 @@ final class CliArguments
     /**
      * @throws ArgumentsException
      */
-    public function next(): CliArgument
+    public function next(): Argument
     {
         if (!isset($this->arguments[$this->pointer])) {
             throw new ArgumentsException('invalid argument');
@@ -38,7 +38,7 @@ final class CliArguments
     /**
      * @throws ArgumentsException
      */
-    public function peek(): CliArgument
+    public function peek(): Argument
     {
         if (!isset($this->arguments[$this->pointer])) {
             throw new ArgumentsException('invalid argument');

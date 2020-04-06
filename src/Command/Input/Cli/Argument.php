@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Qlimix\Cli\Command\Input\Parser;
+namespace Qlimix\Cli\Command\Input\Cli;
 
 use function strlen;
 use function strpos;
 
-final class CliArgument
+final class Argument
 {
     private const INPUT_READ_TOKEN = '-';
     private const NO_MORE_OPTIONS_TOKEN = '--';

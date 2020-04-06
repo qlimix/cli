@@ -1,22 +1,22 @@
 <?php declare(strict_types=1);
 
-namespace Qlimix\Tests\Cli\Command\Input\Parser;
+namespace Qlimix\Tests\Cli\Command\Input\Cli;
 
 use PHPUnit\Framework\TestCase;
-use Qlimix\Cli\Command\Input\Parser\CliArgument;
-use Qlimix\Cli\Command\Input\Parser\CliArguments;
+use Qlimix\Cli\Command\Input\Cli\Argument;
+use Qlimix\Cli\Command\Input\Cli\Arguments;
 use Qlimix\Cli\Command\Input\Parser\Exception\ArgumentsException;
 
-final class CliArgumentsTest extends TestCase
+final class ArgumentsTest extends TestCase
 {
     public function testShouldNext(): void
     {
         $foo = 'foo';
         $bar = 'bar';
 
-        $cliArgument = new CliArguments([
-            new CliArgument('foo'),
-            new CliArgument('bar'),
+        $cliArgument = new Arguments([
+            new Argument('foo'),
+            new Argument('bar'),
         ]);
 
         $this->assertSame($foo, $cliArgument->next()->toString());
@@ -28,7 +28,7 @@ final class CliArgumentsTest extends TestCase
 
     public function testShouldThrowOnNothingMoreToNext(): void
     {
-        $cliArgument = new CliArguments([]);
+        $cliArgument = new Arguments([]);
         $this->expectException(ArgumentsException::class);
         $cliArgument->next();
     }
@@ -37,8 +37,8 @@ final class CliArgumentsTest extends TestCase
     {
         $foo = 'foo';
 
-        $cliArgument = new CliArguments([
-            new CliArgument('foo'),
+        $cliArgument = new Arguments([
+            new Argument('foo'),
         ]);
 
         $this->assertSame($foo, $cliArgument->peek()->toString());
@@ -50,7 +50,7 @@ final class CliArgumentsTest extends TestCase
 
     public function testShouldThrowOnNothingMoreToPeek(): void
     {
-        $cliArgument = new CliArguments([]);
+        $cliArgument = new Arguments([]);
 
         $this->expectException(ArgumentsException::class);
         $cliArgument->peek();

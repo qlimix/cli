@@ -3,6 +3,8 @@
 namespace Qlimix\Cli\Command\Input\Parser;
 
 use Qlimix\Cli\Command\Command;
+use Qlimix\Cli\Command\Input\Cli\Argument;
+use Qlimix\Cli\Command\Input\Cli\Arguments;
 use Qlimix\Cli\Command\Input\CommandInput;
 use Qlimix\Cli\Command\Input\Input;
 use Qlimix\Cli\Command\Input\InputArgument;
@@ -24,9 +26,9 @@ final class Parser implements ParserInterface
 {
     private const OPTION_LONG_VALUE_REGEX = '^([a-zA-Z0-9\-\_]+)(?|\=["\']{1}(.*)["\']{1})$';
 
-    private CliArguments $arguments;
+    private Arguments $arguments;
 
-    public function __construct(CliArguments $arguments)
+    public function __construct(Arguments $arguments)
     {
         $this->arguments = $arguments;
     }
@@ -80,7 +82,7 @@ final class Parser implements ParserInterface
      *
      * @throws ParserException
      */
-    private function parseShortOption(CliArgument $cliArgument, array &$options): array
+    private function parseShortOption(Argument $cliArgument, array &$options): array
     {
         $shortOptions = str_split($cliArgument->toString());
         array_shift($shortOptions);
@@ -129,7 +131,7 @@ final class Parser implements ParserInterface
      *
      * @throws ParserException
      */
-    private function parseLongOption(CliArgument $cliArgument, array &$options): InputOption
+    private function parseLongOption(Argument $cliArgument, array &$options): InputOption
     {
         $longOption = substr($cliArgument->toString(), 2);
 
@@ -186,11 +188,11 @@ final class Parser implements ParserInterface
     }
 
     /**
-     * @param CliArgument[] $arguments
+     * @param \Qlimix\Cli\Command\Argument[] $arguments
      *
      * @throws ParserException
      */
-    private function parseArgument(CliArgument $cliArgument, array &$arguments): InputArgument
+    private function parseArgument(Argument $cliArgument, array &$arguments): InputArgument
     {
         $argument = current($arguments);
         if ($argument === false) {

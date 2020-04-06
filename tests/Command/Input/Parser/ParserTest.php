@@ -3,11 +3,10 @@
 namespace Qlimix\Tests\Cli\Command\Input\Parser;
 
 use PHPUnit\Framework\TestCase;
-use Qlimix\Cli\Command\Argument;
 use Qlimix\Cli\Command\Command;
 use Qlimix\Cli\Command\CommandInterface;
-use Qlimix\Cli\Command\Input\Parser\CliArgument;
-use Qlimix\Cli\Command\Input\Parser\CliArguments;
+use Qlimix\Cli\Command\Input\Cli\Argument;
+use Qlimix\Cli\Command\Input\Cli\Arguments;
 use Qlimix\Cli\Command\Input\Parser\Exception\ParserException;
 use Qlimix\Cli\Command\Input\Parser\Parser;
 use Qlimix\Cli\Command\Name;
@@ -18,9 +17,9 @@ final class ParserTest extends TestCase
 {
     public function testShouldParseArgument(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('foo'),
-            new CliArgument('bar')
+        $parser = new Parser(new Arguments([
+            new Argument('foo'),
+            new Argument('bar')
         ]));
 
         $command = new Command(
@@ -28,8 +27,8 @@ final class ParserTest extends TestCase
             'default',
             $this->createMock(CommandInterface::class),
             [
-                new Argument('foo', 'foo', true, false),
-                new Argument('bar', 'bar', true, false),
+                new \Qlimix\Cli\Command\Argument('foo', 'foo', true, false),
+                new \Qlimix\Cli\Command\Argument('bar', 'bar', true, false),
             ],
             []
         );
@@ -42,8 +41,8 @@ final class ParserTest extends TestCase
 
     public function testShouldParseShortOption(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('-v')
+        $parser = new Parser(new Arguments([
+            new Argument('-v')
         ]));
 
         $command = new Command(
@@ -69,9 +68,9 @@ final class ParserTest extends TestCase
 
     public function testShouldParseLongOption(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--verbose'),
-            new CliArgument('1'),
+        $parser = new Parser(new Arguments([
+            new Argument('--verbose'),
+            new Argument('1'),
         ]));
 
         $command = new Command(
@@ -97,8 +96,8 @@ final class ParserTest extends TestCase
 
     public function testShouldParseLongOptionEqualQuoted(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--verbose="1"')
+        $parser = new Parser(new Arguments([
+            new Argument('--verbose="1"')
         ]));
 
         $command = new Command(
@@ -124,9 +123,9 @@ final class ParserTest extends TestCase
 
     public function testShouldNoMoreOptionsShouldIgnoreGetDefault(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--'),
-            new CliArgument('--verbose="2"'),
+        $parser = new Parser(new Arguments([
+            new Argument('--'),
+            new Argument('--verbose="2"'),
         ]));
 
         $command = new Command(
@@ -152,8 +151,8 @@ final class ParserTest extends TestCase
 
     public function testShouldReadFromInput(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('-'),
+        $parser = new Parser(new Arguments([
+            new Argument('-'),
         ]));
 
         $command = new Command(
@@ -171,8 +170,8 @@ final class ParserTest extends TestCase
 
     public function testShouldParseMultipleShortOptions(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('-cba'),
+        $parser = new Parser(new Arguments([
+            new Argument('-cba'),
         ]));
 
         $command = new Command(
@@ -214,8 +213,8 @@ final class ParserTest extends TestCase
 
     public function testShouldThrowOnUnknownShortOption(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('-a'),
+        $parser = new Parser(new Arguments([
+            new Argument('-a'),
         ]));
 
         $command = new Command(
@@ -232,8 +231,8 @@ final class ParserTest extends TestCase
 
     public function testShouldThrowOnUnknownLongOption(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--does-not-exist'),
+        $parser = new Parser(new Arguments([
+            new Argument('--does-not-exist'),
         ]));
 
         $command = new Command(
@@ -250,8 +249,8 @@ final class ParserTest extends TestCase
 
     public function testShouldFlagOption(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--verbose'),
+        $parser = new Parser(new Arguments([
+            new Argument('--verbose'),
         ]));
 
         $command = new Command(
@@ -276,11 +275,11 @@ final class ParserTest extends TestCase
 
     public function testShouldThrowOnMoreArgumentsThanForGivenCommand(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('foo'),
-            new CliArgument('bar'),
-            new CliArgument('oof'),
-            new CliArgument('rab'),
+        $parser = new Parser(new Arguments([
+            new Argument('foo'),
+            new Argument('bar'),
+            new Argument('oof'),
+            new Argument('rab'),
         ]));
 
         $command = new Command(
@@ -288,7 +287,7 @@ final class ParserTest extends TestCase
             'default',
             $this->createMock(CommandInterface::class),
             [
-                new Argument('foo', 'foo', true, false),
+                new \Qlimix\Cli\Command\Argument('foo', 'foo', true, false),
             ],
             []
         );
@@ -299,9 +298,9 @@ final class ParserTest extends TestCase
 
     public function testShouldReturnLongOptionArray(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--file="1"'),
-            new CliArgument('--file="2"'),
+        $parser = new Parser(new Arguments([
+            new Argument('--file="1"'),
+            new Argument('--file="2"'),
         ]));
 
         $command = new Command(
@@ -329,11 +328,11 @@ final class ParserTest extends TestCase
 
     public function testShouldReturnShortOptionArray(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--file'),
-            new CliArgument('1'),
-            new CliArgument('--file'),
-            new CliArgument('2'),
+        $parser = new Parser(new Arguments([
+            new Argument('--file'),
+            new Argument('1'),
+            new Argument('--file'),
+            new Argument('2'),
         ]));
 
         $command = new Command(
@@ -361,9 +360,9 @@ final class ParserTest extends TestCase
 
     public function testShouldReturnArgumentArray(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('foo'),
-            new CliArgument('bar'),
+        $parser = new Parser(new Arguments([
+            new Argument('foo'),
+            new Argument('bar'),
         ]));
 
         $command = new Command(
@@ -371,7 +370,7 @@ final class ParserTest extends TestCase
             'default',
             $this->createMock(CommandInterface::class),
             [
-                new Argument('foo', 'foo', true, true),
+                new \Qlimix\Cli\Command\Argument('foo', 'foo', true, true),
             ],
             []
         );
@@ -385,9 +384,9 @@ final class ParserTest extends TestCase
 
     public function testShouldTakeDefaultOverNextArgument(): void
     {
-        $parser = new Parser(new CliArguments([
-            new CliArgument('--verbose'),
-            new CliArgument('-h')
+        $parser = new Parser(new Arguments([
+            new Argument('--verbose'),
+            new Argument('-h')
         ]));
 
         $command = new Command(
