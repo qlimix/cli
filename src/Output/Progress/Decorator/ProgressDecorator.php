@@ -45,7 +45,8 @@ final class ProgressDecorator implements DecoratorInterface
         $progressDraw = $progressDraw > 0 ? str_repeat(self::PROGRESS, $progressDraw) : '';
         $todoDraw = $todoDraw > 0 ? str_repeat(' ', $todoDraw) : '';
 
-        return [self::START
+        return [
+            self::START
             .$progressDraw
             .self::POINTER
             .$todoDraw
