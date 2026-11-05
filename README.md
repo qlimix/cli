@@ -1,5 +1,7 @@
 # cli
 
+> **Archived:** this package is no longer maintained.
+
 [![Travis CI](https://api.travis-ci.org/qlimix/cli.svg?branch=master)](https://travis-ci.org/qlimix/cli)
 [![Coveralls](https://img.shields.io/coveralls/github/qlimix/cli.svg)](https://coveralls.io/github/qlimix/cli)
 [![Packagist](https://img.shields.io/packagist/v/qlimix/cli.svg)](https://packagist.org/packages/qlimix/cli)
